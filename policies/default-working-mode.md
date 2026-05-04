@@ -27,6 +27,7 @@ Source of truth: yes
   - PR description references to the source spike and discarded alternatives
   - active plan, completed plan, or handoff references that record the exploration path
 - If a WIP commit is directly reused, prefer `git cherry-pick -x <commit>` so the resulting delivery commit records the original commit hash.
+- When integrating multiple delivery branches into a shared baseline, merge them one branch at a time with explicit merge commits, preferably `git merge --no-ff <branch>`, and run the smallest relevant verification after each merge. Avoid batching unrelated delivery branches into one multi-parent merge unless the user explicitly accepts the reduced bisect and review granularity.
 - Do not commit local artifacts, temporary samples, scratch files, or generated side effects to delivery branches unless they are deliberately promoted to owned fixtures, documentation, or generated artifacts with a verification command.
 
 ## Worktree Setup
