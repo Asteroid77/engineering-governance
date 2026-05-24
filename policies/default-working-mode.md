@@ -48,6 +48,18 @@ Protection belongs at the boundary that owns the responsibility:
 - Control resource access at resource boundaries.
 - Keep internal code simple once upstream design and boundary validation already guarantee the invariant.
 
+## Responsibility Boundary Rule
+
+Every implementation must preserve the responsibility boundaries already established by the target repository:
+
+- Before changing code, identify which component, module, layer, package, service, adapter, public contract, or owner is responsible for the behavior.
+- Place new behavior in the owner that already owns that responsibility, or explicitly create a new owner when the existing boundaries do not fit.
+- Public contracts must expose the responsibility they own, not incidental implementation details or unrelated framework capabilities.
+- Callers must not bypass the owner of a responsibility by depending directly on internal implementation details.
+- Cross-boundary access must go through the repository's established public contracts, ports, adapters, APIs, or documented integration points.
+- When a change introduces or changes dependency direction, public contracts, ownership, or responsibility boundaries, add or update structure tests or boundary tests where the repository has a testable boundary mechanism.
+- Structure rules should describe responsibilities, package or layer patterns, dependency direction, or ownership rules. Avoid one-off restrictions for a single concrete class unless the repository intentionally defines that class as a boundary.
+
 ## Noise Rule
 
 When a constraint is already solved by design, schema, type system, generated artifacts, or boundary validation, do not repeat the same constraint downstream through fallback branches, compatibility paths, duplicate config, duplicate allowlists, or noisy logs.
